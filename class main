@@ -1,0 +1,58 @@
+package perpustakaanmodelxyz;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author ACER
+ */
+public class PerpustakaanModelXYZ {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Admin admin = new Admin("moza","moza123");
+        Buku buku = new Buku("Laskar Pelangi",1,"Mozaa",true);
+        Buku buku2 = new Buku("Transforemrs",2,"Ghozali",true);
+        Buku buku3 = new Buku("naruto",3,"ATIKAH",true);
+        AngotaPerpustakaan anggota = new AngotaPerpustakaan("Atikah",1,"Metro","tIKAHH","2217");
+        
+        ////////////////////////////////////////// TAMBAH, HAPUS, DAN OUTPUT DAFTAR BUKU ADMIN
+        // TAMBAH BUKU
+        admin.tambahkoleksibuku(buku);
+        admin.tambahkoleksibuku(buku2);
+        admin.tambahkoleksibuku(buku3);
+        //HAPUS BUKU
+        admin.hapusbuku(buku);
+        
+        //MENGELUARKAN ISI DAFTAR BUKU
+        ArrayList<Buku>DaftarBuku = admin.getDaftarBuku();
+        System.out.println("     -----------------------------");
+        System.out.println("     ||DAFTAR BUKU YANG TERSEDIA||");
+        System.out.println("     -----------------------------");
+        for(Buku loo : DaftarBuku){
+            System.out.println("Judul Buku\t\t: " + loo.getJudul());
+            System.out.println("Nama Pengarang\t\t: " + loo.getPengarang());
+            System.out.println("Nomor ISBN\t\t: " + loo.getNoISBN());
+            System.out.println("");
+        }        
+         
+         ////////////////////////////////////////// Anggota Meminjam,mengembalikan, cari BUKU
+         //CARI BUKU        
+        anggota.cariBuku(admin, "NARUTO");
+        
+        //PINJAM DAN KEMBALI BUKU
+        Date d1 = new Date();
+        anggota.pinjambuku(1, buku, anggota,d1 );
+        anggota.kembalibuku(1, buku, anggota, d1);
+
+        //////////////////////////////////////////Admin Liat daftar transaksi dan histori      
+        admin.lihatdaftartransaksi(anggota);
+        admin.liatHistoriAnggota(anggota);
+        }
+    
+    }
+    
